@@ -1,31 +1,47 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div>
+      <app-header></app-header>
+        <transition name="slide" mode="out-in">
+          <router-view></router-view>
+        </transition>
+      <app-footer></app-footer>
     </div>
-    <router-view/>
-  </div>
 </template>
 
+<script>
+import appHeader from './components/Header';
+import appFooter from './components/Footer';
+
+export default {
+  name: 'App',
+  components: {
+    appHeader,
+    appFooter
+  },
+  data: () => ({
+    //
+  }),
+};
+</script>
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+	
+	.slide-enter-active{
+		animation: slideIn 0.7s;
+	}
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+	.slide-leave-active{
+		animation: slideOut 0.7s;
+	}
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+
+	@keyframes slideIn{
+		from{opacity: 0;}
+		to{opacity: 1;}
+	}
+
+	@keyframes slideOut{
+		from{opacity: 1;}
+		to{opacity: 0;}
+	}
 </style>
